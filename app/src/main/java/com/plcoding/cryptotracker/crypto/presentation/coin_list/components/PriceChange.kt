@@ -60,7 +60,8 @@ fun PriceChange(
             text = "${change.formatted} %",
             color = contentColor,
             fontSize = 14.sp,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier.padding(end = 4.dp)
         )
     }
 }

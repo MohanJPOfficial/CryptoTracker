@@ -75,7 +75,7 @@ fun CoinListItem(
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = "$ ${coinUi.priceUsd.formatted}",
+                text = "$${coinUi.priceUsd.formatted}",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = contentColor
