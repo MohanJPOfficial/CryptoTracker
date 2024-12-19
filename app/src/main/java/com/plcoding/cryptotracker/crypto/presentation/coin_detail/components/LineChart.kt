@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -163,6 +164,9 @@ fun LineChart(
 
         xLabelWidth = maxXLabelWidth + xAxisLabelSpacingPx
 
+        /**
+         * X - Label
+         */
         xLabelTextLayoutResults.forEachIndexed { index, result ->
             val x = viewPortLeftX + xAxisLabelSpacingPx / 2f +
                     xLabelWidth * index
@@ -179,6 +183,9 @@ fun LineChart(
                     style.unselectedColor
             )
 
+            /**
+             * Vertical helper lines
+             */
             if (showHelperLines) {
                 drawLine(
                     color = if (selectedDataPointIndex == index)
@@ -206,6 +213,9 @@ fun LineChart(
         val remainingHeightForLabels = labelViewPortHeightPx - heightRequiredForLabels
         val spaceBetweenLabels = remainingHeightForLabels / labelCountExcludingLastLabel
 
+        /**
+         * Y - label
+         */
         yLabelTextLayoutResults.forEachIndexed { index, result ->
             val x = horizontalPaddingPx + maxYLabelWidth - result.size.width.toFloat()
             val y = viewportTopY +
@@ -220,6 +230,9 @@ fun LineChart(
                 color = style.unselectedColor
             )
 
+            /**
+             * Horizontal helper lines
+             */
             if (showHelperLines) {
                 drawLine(
                     color = style.unselectedColor,
@@ -271,6 +284,9 @@ fun LineChart(
             conPoints2.add(DataPoint(x, y2, ""))
         }
 
+        /**
+         * Line path
+         */
         val linePath = Path().apply {
             if (drawPoints.isNotEmpty()) {
                 moveTo(drawPoints.first().x, drawPoints.first().y)
@@ -297,6 +313,9 @@ fun LineChart(
             )
         )
 
+        /**
+         * Circle dot
+         */
         drawPoints.forEachIndexed { index, point ->
             if (isShowingDataPoints) {
                 val circleOffset = Offset(
@@ -355,9 +374,9 @@ private fun LineChartPreview() {
             }
         }
         val style = ChartStyle(
-            chartLineColor = Color.Black,
-            unselectedColor = Color(0xFF7C7C7C),
-            selectedColor = Color.Black,
+            chartLineColor = Color.White,
+            unselectedColor = MaterialTheme.colorScheme.secondary,
+            selectedColor = Color.White,
             helperLinesThicknessPx = 1f,
             axisLinesThicknessPx = 5f,
             labelFontSize = 14.sp,
@@ -386,8 +405,7 @@ private fun LineChartPreview() {
             unit = "$",
             modifier = Modifier
                 .width(700.dp)
-                .height(300.dp)
-                .background(Color.White),
+                .height(300.dp),
             selectedDataPoint = dataPoints[1]
         )
     }
